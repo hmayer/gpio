@@ -1,4 +1,4 @@
-GPIO
+Waffle Systems GPIO
 ====
 
 Library for accessing GPIO hardware using PHP.
