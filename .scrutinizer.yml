@@ -1,6 +1,6 @@
 build:
     environment:
-        php: '5.4.28
+        php: '5.4.28'
 checks:
     php:
         code_rating: true
