@@ -61,7 +61,6 @@ checks:
         verify_property_names: true
         verify_argument_usable_as_reference: true
         verify_access_scope_valid: true
-        variable_existence: true
         code_rating: true
         duplication: true
         useless_calls: true
@@ -86,7 +85,6 @@ checks:
         assignment_of_null_return: true
         use_self_instead_of_fqcn: true
         uppercase_constants: true
-        uppercase_basic_constants: true
         too_many_arguments: true
         symfony_request_injection: true
         spacing_of_function_arguments: true
@@ -215,7 +213,8 @@ checks:
         avoid_entity_manager_injection: true
         avoid_duplicate_types: true
         avoid_corrupting_byteorder_marks: true
-        avoid_closing_tag: true
         avoid_aliased_php_functions: true
         argument_type_checks: true
         align_assignments: true
+        variable_existence: true
+        avoid_closing_tag: true
