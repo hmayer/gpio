@@ -6,7 +6,7 @@ use \WaffleSystems\GPIO\GPIOInterface;
 class BasicTestGPIOInterface implements GPIOInterface
 {
 
-    private $pins = array();
+    private $pins = [];
 
     private function doesPinExist($number)
     {
@@ -16,10 +16,10 @@ class BasicTestGPIOInterface implements GPIOInterface
     public function enablePin($number)
     {
         if (!$this->doesPinExist($number)) {
-            $this->pins[$number] = array(
+            $this->pins[$number] = [
                     'direction' => null,
                     'value' => null
-                );
+                ];
         }
         echo "Enable Pin : [$number]\n";
     }
