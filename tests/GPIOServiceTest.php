@@ -3,6 +3,7 @@ namespace WaffleSystems\Tests\GPIO;
 
 use WaffleSystems\GPIO\GPIOService;
 use WaffleSystems\GPIO\GPIOServiceFactory;
+use WaffleSystems\GPIO\RaspberryPiGPIOInterface;
 
 class GPIOServiceTest extends \PHPUnit_Framework_TestCase
 {
