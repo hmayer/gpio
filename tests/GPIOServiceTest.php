@@ -10,6 +10,7 @@ class GPIOServiceTest extends \PHPUnit_Framework_TestCase
     public function testRaspberryPiFactory()
     {
         $factory = GPIOServiceFactory::createForRaspberryPi();
+
         $this->assertTrue($factory instanceof GPIOService);
         $this->assertTrue($factory->getHandler() instanceof RaspberryPiGPIOInterface);
     }
