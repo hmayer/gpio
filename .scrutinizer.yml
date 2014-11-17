@@ -1,4 +1,15 @@
+build:
+    environment:
+        php: '5.4.28
+checks:
+    php:
+        code_rating: true
+        duplication: true
 tools:
+    php_code_sniffer: true
+    php_cs_fixer: true
+    php_mess_detector: true
+    sensiolabs_security_checker: true
     php_sim:
         enabled: true
         min_mass: 16
@@ -40,5 +51,5 @@ tools:
 filter:
     excluded_paths:
         - 'tests/*'
-    paths: {  }
+    paths: [src/*]
 build_failure_conditions: {  }
