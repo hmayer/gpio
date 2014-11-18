@@ -14,9 +14,9 @@ class RaspberryPiGPIOInterface implements GPIOInterface
 
     private function putIntoFile($file, $value)
     {
-        $file = "{$this->gpioDirectory}/$file";
+        $file = $this->gpioDirectory . '/' . $file;
         if ($this->dryRunTesting) {
-            echo "$file = $value\n";
+            echo $file, ' = ', $value, "\n";
             return;
         }
         file_put_contents($file, $value);
@@ -24,9 +24,9 @@ class RaspberryPiGPIOInterface implements GPIOInterface
 
     private function getFromFile($file)
     {
-        $path = "{$this->gpioDirectory}/$file";
+        $path = $this->gpioDirectory . '/' . $file;
         if ($this->dryRunTesting) {
-            echo "$path\n";
+            echo $path, "\n";
             return null;
         }
         return file_get_contents($path);
@@ -44,27 +44,26 @@ class RaspberryPiGPIOInterface implements GPIOInterface
 
     public function isPinEnabled($number)
     {
-        return is_dir("{$this->gpioDirectory}/gpio$number");
+        return is_dir($this->gpioDirectory . '/gpio' . $number);
     }
 
     public function getPinDirection($number)
     {
-        return $this->getFromFile("gpio$number/direction");
+        return $this->getFromFile('gpio' . $number . '/direction');
     }
 
     public function setPinDirection($number, $direction)
     {
-        $this->putIntoFile("gpio$number/direction", $direction);
+        $this->putIntoFile('gpio' . $number . '/direction', $direction);
     }
 
     public function getPinValue($number)
     {
-        return $this->getFromFile("gpio$number/value");
+        return $this->getFromFile('gpio' . $number . '/value');
     }
 
     public function setPinValue($number, $value)
     {
-        $this->putIntoFile("gpio$number/value", $value);
+        $this->putIntoFile('gpio' . $number . '/value', $value);
     }
-
 }

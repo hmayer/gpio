@@ -19,6 +19,9 @@ interface GPIOInterface
      */
     public function isPinEnabled($number);
 
+    /**
+     * @return string
+     */
     public function getPinDirection($number);
 
     /**
@@ -26,11 +29,13 @@ interface GPIOInterface
      */
     public function setPinDirection($number, $direction);
 
+    /**
+     * @return string
+     */
     public function getPinValue($number);
 
     /**
      * @return void
      */
     public function setPinValue($number, $value);
-
 }

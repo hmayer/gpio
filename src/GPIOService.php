@@ -20,5 +20,4 @@ class GPIOService
     {
         return $this->handler;
     }
-
 }

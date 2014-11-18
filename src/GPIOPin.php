@@ -9,7 +9,7 @@ class GPIOPin
 
     public function __construct($place, GPIOService $service)
     {
-        $this->place = $place;
+        $this->place   = $place;
         $this->service = $service;
     }
     
@@ -23,6 +23,9 @@ class GPIOPin
         $this->service->getHandler()->disablePin($this->place);
     }
 
+    /**
+     * @return string
+     */
     public function getDirection()
     {
         return $this->service->getHandler()->getPinDirection($this->place);
@@ -33,6 +36,9 @@ class GPIOPin
         $this->service->getHandler()->setPinDirection($this->place, $direction);
     }
 
+    /**
+     * @return string
+     */
     public function getValue()
     {
         return $this->service->getHandler()->getPinValue($this->place);
@@ -42,5 +48,4 @@ class GPIOPin
     {
         $this->service->getHandler()->setPinValue($this->place, $value);
     }
-
 }

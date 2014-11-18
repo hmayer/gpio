@@ -8,5 +8,4 @@ class GPIOServiceFactory
     {
         return new GPIOService(new RaspberryPiGPIOInterface());
     }
-
 }
