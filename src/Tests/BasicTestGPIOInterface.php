@@ -99,8 +99,6 @@ class BasicTestGPIOInterface implements GPIOInterface
      * @param int $pin
      * @param string $key
      * @param string $value
-     * 
-     * @return boolean
      */
     private function setDataOfPin($pin, $key, $value)
     {
