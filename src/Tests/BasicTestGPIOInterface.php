@@ -1,6 +1,7 @@
 <?php
 namespace WaffleSystems\GPIO\Tests;
 
+use \RuntimeException;
 use \WaffleSystems\GPIO\GPIOInterface;
 
 class BasicTestGPIOInterface implements GPIOInterface
@@ -70,7 +71,7 @@ class BasicTestGPIOInterface implements GPIOInterface
     public function setPinDirection($number, $direction)
     {
         echo 'Set Pin Direction : [', $number, '], [', $direction, "]\n";
-        return $this->setDataOfPin($number, 'direction', $direction);
+        $this->setDataOfPin($number, 'direction', $direction);
     }
 
     /**
@@ -91,7 +92,7 @@ class BasicTestGPIOInterface implements GPIOInterface
     public function setPinValue($number, $value)
     {
         echo 'Set Pin Value : [', $number, '], [', $value, "]\n";
-        return $this->setDataOfPin($number, 'value', $value);
+        $this->setDataOfPin($number, 'value', $value);
     }
 
     /**
@@ -105,10 +106,8 @@ class BasicTestGPIOInterface implements GPIOInterface
     {
         if ($this->isPin($pin)) {
             $this->pins[$pin][$key] = $value;
-            return true;
         }
-        return false;
+        throw new RuntimeException('Pin does not exist!');
     }
-
 }
 
