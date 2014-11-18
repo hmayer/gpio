@@ -13,7 +13,7 @@ class BasicTestGPIOInterface implements GPIOInterface
      * 
      * @return boolean
      */
-    private function pinExists($number)
+    private function isPin($number)
     {
         return isset($this->pins[$number]);
     }
@@ -23,7 +23,7 @@ class BasicTestGPIOInterface implements GPIOInterface
      */
     public function enablePin($number)
     {
-        if (!$this->doesPinExist($number)) {
+        if (!$this->isPin($number)) {
             $this->pins[$number] = [
                     'direction' => null,
                     'value' => null
@@ -49,7 +49,7 @@ class BasicTestGPIOInterface implements GPIOInterface
     public function isPinEnabled($number)
     {
         echo 'Return Is Pin Enabled : [', $number, "]\n";
-        return $this->doesPinExist($number);
+        return $this->isPin($number);
     }
 
     /**
@@ -60,7 +60,7 @@ class BasicTestGPIOInterface implements GPIOInterface
     public function getPinDirection($number)
     {
         echo 'Return Pin Direction : [', $number, "]\n";
-        return $this->doesPinExist($number) ? $this->pins[$number]['direction'] : null;
+        return $this->isPin($number) ? $this->pins[$number]['direction'] : null;
     }
 
     /**
@@ -81,7 +81,7 @@ class BasicTestGPIOInterface implements GPIOInterface
     public function getPinValue($number)
     {
         echo 'Return Pin Value : [', $number, "]\n";
-        return $this->doesPinExist($number) ? $this->pins[$number]['value'] : null;
+        return $this->isPin($number) ? $this->pins[$number]['value'] : null;
     }
 
     /**
@@ -103,7 +103,7 @@ class BasicTestGPIOInterface implements GPIOInterface
      */
     private function setDataOfPin($pin, $key, $value)
     {
-        if ($this->doesPinExist($pin)) {
+        if ($this->isPin($pin)) {
             $this->pins[$pin][$key] = $value;
             return true;
         }
