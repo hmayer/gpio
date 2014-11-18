@@ -76,12 +76,11 @@ checks:
         no_trait_type_hints: true
         no_trailing_whitespace: true
         no_space_inside_cast_operator: true
-        no_space_between_concatenation_operator: true
         no_space_before_semicolon: true
         no_space_around_object_operator: true
         no_space_after_cast: true
         no_short_variable_names:
-            minimum: '3'
+            minimum: '2'
         no_short_open_tag: true
         no_short_method_names:
             minimum: '3'
