@@ -94,7 +94,6 @@ checks:
         no_empty_statements: true
         no_else_if_statements: true
         no_duplicate_arguments: true
-        no_elseif_statements: true
         no_debug_code: true
         no_commented_out_code: true
         more_specific_types_in_doc_comments: true
