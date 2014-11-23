@@ -13,16 +13,20 @@
             "role": "Developer"
         }
     ],
-    "autoload": {
-        "psr-4": {
-            "WaffleSystems\\GPIO\\": "src",
-            "WaffleSystems\\Tests\\GPIO\\": "tests"
-        }
-    },
     "require": {
         "php": ">=5.4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "4.2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "WaffleSystems\\GPIO\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WaffleSystems\\GPIO\\Tests\\": "tests"
+        }
     }
 }
