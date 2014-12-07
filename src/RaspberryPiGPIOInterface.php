@@ -6,6 +6,12 @@ class RaspberryPiGPIOInterface implements GPIOInterface
 
     private $gpioDirectory = '/sys/class/gpio';
     private $dryRunTesting;
+    private $commandPrefix;
+
+    public function setCommandPrefix($enabled)
+    {
+        $this->dryRunTesting = $enabled;
+    }
 
     public function setTestingEnabled($enabled)
     {
@@ -15,23 +21,23 @@ class RaspberryPiGPIOInterface implements GPIOInterface
     private function putIntoFile($file, $value)
     {
         $file = $this->gpioDirectory . '/' . $file;
-        $command = $this->commandPrefix . 'echo ' . shell_escapearg($value) . ' > ' . shell_escapearg($file);
+        $command = $this->commandPrefix . 'echo ' . \escapeshellarg($value) . ' > ' . \escapeshellarg($file);
         if ($this->dryRunTesting) {
             echo $command, "\n";
             return;
         }
-        shell_exec($command);
+        \shell_exec($command);
     }
 
     private function getFromFile($file)
     {
         $path = $this->gpioDirectory . '/' . $file;
-        $command = $this->commandPrefix . 'cat ' . shell_escapearg($path);
+        $command = $this->commandPrefix . 'cat ' . \escapeshellarg($path);
         if ($this->dryRunTesting) {
             echo $command, "\n";
             return null;
         }
-        shell_exec($command);
+        \shell_exec($command);
     }
 
     public function enablePin($number)
