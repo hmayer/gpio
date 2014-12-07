@@ -8,9 +8,9 @@ class RaspberryPiGPIOInterface implements GPIOInterface
     private $dryRunTesting;
     private $commandPrefix;
 
-    public function setCommandPrefix($enabled)
+    public function setCommandPrefix($prefix)
     {
-        $this->dryRunTesting = $enabled;
+        $this->commandPrefix = $prefix;
     }
 
     public function setTestingEnabled($enabled)
