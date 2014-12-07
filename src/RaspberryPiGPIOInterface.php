@@ -15,21 +15,23 @@ class RaspberryPiGPIOInterface implements GPIOInterface
     private function putIntoFile($file, $value)
     {
         $file = $this->gpioDirectory . '/' . $file;
+        $command = $this->commandPrefix . 'echo ' . shell_escapearg($value) . ' > ' . shell_escapearg($file);
         if ($this->dryRunTesting) {
-            echo $file, ' = ', $value, "\n";
+            echo $command, "\n";
             return;
         }
-        file_put_contents($file, $value);
+        shell_exec($command);
     }
 
     private function getFromFile($file)
     {
         $path = $this->gpioDirectory . '/' . $file;
+        $command = $this->commandPrefix . 'cat ' . shell_escapearg($path);
         if ($this->dryRunTesting) {
-            echo $path, "\n";
+            echo $command, "\n";
             return null;
         }
-        return file_get_contents($path);
+        shell_exec($command);
     }
 
     public function enablePin($number)
