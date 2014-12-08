@@ -18,7 +18,7 @@ class Pin
      */
     public function isOn()
     {
-        return $this->service->getHandler()->readFromPin($this->place) === '1';
+        return 1 === $this->service->getHandler()->readFromPin($this->place);
     }
 
     public function turnOn()

@@ -7,35 +7,20 @@ interface GPIOInterface
     /**
      * @return void
      */
-    public function enablePin($number);
+    public function setupPin($number, $direction);
 
     /**
      * @return void
      */
-    public function disablePin($number);
-
-    /**
-     * @return boolean
-     */
-    public function isPinEnabled($number);
-
-    /**
-     * @return string
-     */
-    public function getPinDirection($number);
+    public function writeToPin($number, $value);
 
     /**
      * @return void
      */
-    public function setPinDirection($number, $direction);
+    public function destroyPin($number);
 
     /**
-     * @return string
+     * @return int
      */
-    public function getPinValue($number);
-
-    /**
-     * @return void
-     */
-    public function setPinValue($number, $value);
+    public function readFromPin($number);
 }

@@ -9,12 +9,17 @@ class RaspberryPiGPIOInterface implements GPIOInterface
     private $dryRunTesting;
     private $commandPrefix;
 
+    public function useBCM($value)
+    {
+        $this->useBCM = $value;
+    }
+
     public function setCommandPrefix($prefix)
     {
         $this->commandPrefix = $prefix;
     }
 
-    public function setTestingEnabled($enabled)
+    public function setTesting($enabled)
     {
         $this->dryRunTesting = $enabled;
     }
@@ -51,6 +56,6 @@ class RaspberryPiGPIOInterface implements GPIOInterface
 
     public function readFromPin($number)
     {
-        return $this->executeGPIO('read ' . escapeshellarg($number));
+        return (int) $this->executeGPIO('read ' . escapeshellarg($number));
     }
 }
