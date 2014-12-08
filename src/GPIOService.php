@@ -20,14 +20,6 @@ class GPIOService
         return new Pin($number, $this, $direction);
     }
 
-    /**
-     * @param Pin $pin
-     */
-    public function destroy(Pin $pin)
-    {
-        $this->handler->destroy($pin);
-    }
-
     public function getHandler()
     {
         return $this->handler;

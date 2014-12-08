@@ -4,14 +4,13 @@ namespace WaffleSystems\GPIO;
 class RaspberryPiGPIOInterface implements GPIOInterface
 {
 
-    private $gpioDirectory = '/sys/class/gpio';
-    private $useBCM;
+    private $useBcm;
     private $dryRunTesting;
     private $commandPrefix;
 
-    public function useBCM($value)
+    public function useBcm($value)
     {
-        $this->useBCM = $value;
+        $this->useBcm = $value;
     }
 
     public function setCommandPrefix($prefix)
@@ -24,10 +23,10 @@ class RaspberryPiGPIOInterface implements GPIOInterface
         $this->dryRunTesting = $enabled;
     }
 
-    private function executeGPIO($command)
+    private function executeGpio($command)
     {
         $fullCommand = $this->commandPrefix . 'gpio ';
-        if ($this->useBCM) {
+        if ($this->useBcm) {
             $fullCommand .= '-g ';
         }
         $fullCommand .= $command;
@@ -41,21 +40,21 @@ class RaspberryPiGPIOInterface implements GPIOInterface
 
     public function setupPin($number, $direction)
     {
-        $this->executeGPIO('mode ' . escapeshellarg($number) . ' ' . escapeshellarg($direction));
+        $this->executeGpio('mode ' . escapeshellarg($number) . ' ' . escapeshellarg($direction));
     }
 
     public function writeToPin($number, $value)
     {
-        $this->executeGPIO('write ' . escapeshellarg($number) . ' ' . escapeshellarg($value));
+        $this->executeGpio('write ' . escapeshellarg($number) . ' ' . escapeshellarg($value));
     }
 
     public function destroyPin($number)
     {
-        $this->executeGPIO('unexport ' . escapeshellarg($number));
+        $this->executeGpio('unexport ' . escapeshellarg($number));
     }
 
     public function readFromPin($number)
     {
-        return (int) $this->executeGPIO('read ' . escapeshellarg($number));
+        return (int) $this->executeGpio('read ' . escapeshellarg($number));
     }
 }

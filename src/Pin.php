@@ -6,11 +6,13 @@ class Pin
 
     private $service;
     private $place;
+    private $direction;
 
-    public function __construct($place, GPIOService $service)
+    public function __construct($place, GPIOService $service, $direction)
     {
-        $this->place   = $place;
-        $this->service = $service;
+        $this->place     = $place;
+        $this->service   = $service;
+        $this->direction = $direction;
     }
 
     /**
