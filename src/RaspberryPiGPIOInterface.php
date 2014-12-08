@@ -5,6 +5,7 @@ class RaspberryPiGPIOInterface implements GPIOInterface
 {
 
     private $gpioDirectory = '/sys/class/gpio';
+    private $useBCM;
     private $dryRunTesting;
     private $commandPrefix;
 
@@ -18,60 +19,38 @@ class RaspberryPiGPIOInterface implements GPIOInterface
         $this->dryRunTesting = $enabled;
     }
 
-    private function putIntoFile($file, $value)
+    private function executeGPIO($command)
     {
-        $file = $this->gpioDirectory . '/' . $file;
-        $command = $this->commandPrefix . 'echo ' . \escapeshellarg($value) . ' > ' . \escapeshellarg($file);
+        $fullCommand = $this->commandPrefix . 'gpio ';
+        if ($this->useBCM) {
+            $fullCommand .= '-g ';
+        }
+        $fullCommand .= $command;
         if ($this->dryRunTesting) {
-            echo $command, "\n";
+            echo $fullCommand, "\n";
             return;
         }
-        \shell_exec($command);
+        $output = shell_exec($fullCommand);
+        return $output;
     }
 
-    private function getFromFile($file)
+    public function setupPin($number, $direction)
     {
-        $path = $this->gpioDirectory . '/' . $file;
-        $command = $this->commandPrefix . 'cat ' . \escapeshellarg($path);
-        if ($this->dryRunTesting) {
-            echo $command, "\n";
-            return null;
-        }
-        \shell_exec($command);
+        $this->executeGPIO('mode ' . escapeshellarg($number) . ' ' . escapeshellarg($direction));
     }
 
-    public function enablePin($number)
+    public function writeToPin($number, $value)
     {
-        $this->putIntoFile('export', $number);
+        $this->executeGPIO('write ' . escapeshellarg($number) . ' ' . escapeshellarg($value));
     }
 
-    public function disablePin($number)
+    public function destroyPin($number)
     {
-        $this->putIntoFile('unexport', $number);
+        $this->executeGPIO('unexport ' . escapeshellarg($number));
     }
 
-    public function isPinEnabled($number)
+    public function readFromPin($number)
     {
-        return is_dir($this->gpioDirectory . '/gpio' . $number);
-    }
-
-    public function getPinDirection($number)
-    {
-        return $this->getFromFile('gpio' . $number . '/direction');
-    }
-
-    public function setPinDirection($number, $direction)
-    {
-        $this->putIntoFile('gpio' . $number . '/direction', $direction);
-    }
-
-    public function getPinValue($number)
-    {
-        return $this->getFromFile('gpio' . $number . '/value');
-    }
-
-    public function setPinValue($number, $value)
-    {
-        $this->putIntoFile('gpio' . $number . '/value', $value);
+        return $this->executeGPIO('read ' . escapeshellarg($number));
     }
 }

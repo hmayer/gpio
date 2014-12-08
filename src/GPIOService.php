@@ -11,9 +11,21 @@ class GPIOService
         $this->handler = $handler;
     }
 
-    public function getPin($number)
+    /**
+     * @param int $number
+     */
+    public function setup($number, $direction)
     {
-        return new GPIOPin($number, $this);
+        $this->handler->setupPin($number, $direction);
+        return new Pin($number, $this, $direction);
+    }
+
+    /**
+     * @param Pin $pin
+     */
+    public function destroy(Pin $pin)
+    {
+        $this->handler->destroy($pin);
     }
 
     public function getHandler()
